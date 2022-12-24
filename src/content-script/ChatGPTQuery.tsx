@@ -18,6 +18,9 @@ function ChatGPTQuery(props: Props) {
   const [retry, setRetry] = useState(0)
   const [done, setDone] = useState(false)
   const [showTip, setShowTip] = useState(false)
+  const copyButton = (
+    <button onClick={() => copyText(answer.text)}>Copy</button>
+  );
 
   useEffect(() => {
     const port = Browser.runtime.connect()
@@ -66,6 +69,7 @@ function ChatGPTQuery(props: Props) {
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
           {answer.text}
         </ReactMarkdown>
+        {copyButton}
         {done && showTip && (
           <p className="gpt-tip">
             Tip: you can switch to manual trigger mode by clicking the extension icon.
